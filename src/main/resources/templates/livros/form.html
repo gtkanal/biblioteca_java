@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Insert title here</title>
+    </head>
+    <body>
+        <form id="livroForm" th:action="@{/livros/(form)}" method="post" th:object="${livro}" action="#" enctype="multipart/form-data">
+            <input type="hidden"  th:field="*{id}" />
+            <div>
+                <img th:if="${livro.capa}" th:src="@{'/' + ${livro.capa}}" width="100px" />
+            </div>
+            <div>
+                <label>Capa do livro</label>
+                <input type="file" name="capaUrl" />
+                <span th:if="${message}" style="color: red;" th:text="${message}">Message Error</span>
+            </div>
+
+            <div class="form-group row">
+
+                Título:<input type="text" th:field="*{nome}" /><br/>
+                <span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome Error</span><br/>
+
+                Total de Páginas: <input type="text" th:field="*{quantidade}" /><br/>
+                <span  th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}">Quantidade de pagina Error</span><br/>
+
+                <br />
+
+                <label class="col-sm-2 col-form-label">Autor</label>
+                <div class="col-sm-10">
+                    <select th:field="*{autor}">
+                        <option th:each="autor : ${autores}"  th:value="${autor.id}" th:text="${autor.nome}">Nome do autor</option>
+                    </select>
+                </div>
+                <br />
+                <br />
+
+                <input type="submit" value="gravar" />
+
+            </div>
+        </form>
+    </body>
+</html>

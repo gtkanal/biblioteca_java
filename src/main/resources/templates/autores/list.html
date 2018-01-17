@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>Nome</td>
+				<td></td>
+				<td></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${autores.empty}">
+				<td colspan="2">Sem autores</td>
+			</tr>
+
+			<tr th:each="autor : ${autores}">
+				<td th:text="${autor.id}">1</td>
+				<td>
+					<a href="#" th:href="@{'/autores/'+${autor.id}}" th:text="${autor.nome}"> Nome </a>
+				</td>
+				<td>
+					<a href="#" th:href="@{'/autores/alterar/'+${autor.id}}" > Altera </a>
+				</td>
+				<td>
+					<a href="#" th:href="@{'/autores/excluir/'+${autor.id}}" > Excluir </a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

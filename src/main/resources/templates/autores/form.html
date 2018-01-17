@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Insert title here</title>
+    </head>
+    <body>
+        <form id="autorForm" th:action="@{/autores/(form)}" method="post" th:object="${autor}" action="#" >
+            <input type="hidden"  th:field="*{id}" />
+            Nome:<input type="text" th:field="*{nome}" /><br/>
+            <span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome Error</span><br/>
+            <input type="submit" value="gravar" />
+        </form>
+    </body>
+</html>

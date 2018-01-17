@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Insert title here</title>
+    </head>
+    <body>
+        <form id="usuarioForm" th:action="@{/usuarios/(form)}" method="post" th:object="${usuario}" action="#" >
+            <input type="hidden"  th:field="*{id}" />
+            Usuário:<input type="text" th:field="*{username}" /><br/>
+            <span  th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span><br/>
+            Senha: <input type="password" th:field="*{passsword}" /><br/>
+            <span  th:if="${#fields.hasErrors('passsword')}" th:errors="*{passsword}">Password Error</span><br/>
+            <input type="submit" value="gravar" />
+        </form>
+    </body>
+</html>
