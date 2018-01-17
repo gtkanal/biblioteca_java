@@ -6,12 +6,20 @@
         <title>Insert title here</title>
     </head>
     <body>
-        <form id="clienteForm" th:action="@{/clientes/(form)}" method="post" th:object="${cliente}" action="#" >
-            <input type="hidden"  th:field="*{idCliente}" />
-            Nome:<input type="text" th:field="*{nome}" /><br/>
-            <span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome Error</span><br/>
-            Endereço:<input type="text" th:field="*{endereco}" /><br/>
-            <input type="submit" value="gravar" />
-        </form>
+        <nav layout:fragment="header" aria-label="breadcrumb" role="navigation">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" th:href="@{/clientes/list}">Clientes</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Novo Cliente</li>
+            </ol>
+        </nav>
+        <div layout:fragment="content" class="container">
+            <form id="clienteForm" th:action="@{/clientes/(form)}" method="post" th:object="${cliente}" action="#" >
+                <input type="hidden"  th:field="*{idCliente}" />
+                Nome:<input type="text" th:field="*{nome}" /><br/>
+                <span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome Error</span><br/>
+                Endereço:<input type="text" th:field="*{endereco}" /><br/>
+                <input type="submit" value="gravar" />
+            </form>
+        </div>
     </body>
 </html>

@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="layout">
 <head>
 <meta charset="UTF-8" />
 <title>Insert title here</title>
 </head>
 <body>
-	<table>
-		<thead>
-			<tr>
-				<td>ID</td>
-				<td>Nome</td>
-				<td></td>
-				<td></td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:if="${clientes.empty}">
-				<td colspan="2">Sem clientes</td>
-			</tr>
+	<h1 layout:fragment="header">
+		<a th:href="@{/clientes/novo}"  class="btn btn-sm btn-info"><i class="glyphicon glyphicon-plus"></i></a>
+		Clientes
+	</h1>
+	<div layout:fragment="content" class="container">
+		<table>
+			<thead>
+				<tr>
+					<td>ID</td>
+					<td>Nome</td>
+					<td></td>
+					<td></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${clientes.empty}">
+					<td colspan="2">Sem clientes</td>
+				</tr>
 
-			<tr th:each="cliente : ${clientes}">
-				<td th:text="${cliente.idCliente}">1</td>
-				<td>
-					<a href="#" th:href="@{'/clientes/'+${cliente.idCliente}}" th:text="${cliente.nome}"> Título </a>
-				</td>
-				<td>
-					<a href="#" th:href="@{'/clientes/alterar/'+${cliente.idCliente}}" > Altera </a>
-				</td>
-				<td>
-					<a href="#" th:href="@{'/clientes/excluir/'+${cliente.idCliente}}" > Excluir </a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+				<tr th:each="cliente : ${clientes}">
+					<td th:text="${cliente.idCliente}">1</td>
+					<td>
+						<a href="#" th:href="@{'/clientes/'+${cliente.idCliente}}" th:text="${cliente.nome}"> Título </a>
+					</td>
+					<td>
+						<a href="#" th:href="@{'/clientes/alterar/'+${cliente.idCliente}}" > Altera </a>
+					</td>
+					<td>
+						<a href="#" th:href="@{'/clientes/excluir/'+${cliente.idCliente}}" > Excluir </a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>

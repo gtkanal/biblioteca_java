@@ -6,11 +6,19 @@
         <title>Insert title here</title>
     </head>
     <body>
-        <form id="autorForm" th:action="@{/autores/(form)}" method="post" th:object="${autor}" action="#" >
-            <input type="hidden"  th:field="*{id}" />
-            Nome:<input type="text" th:field="*{nome}" /><br/>
-            <span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome Error</span><br/>
-            <input type="submit" value="gravar" />
-        </form>
+        <nav layout:fragment="header" aria-label="breadcrumb" role="navigation">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" th:href="@{/autores/list}">Autores</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Novo Autor</li>
+            </ol>
+        </nav>
+        <div layout:fragment="content" class="container">
+            <form id="autorForm" th:action="@{/autores/(form)}" method="post" th:object="${autor}" action="#" >
+                <input type="hidden"  th:field="*{id}" />
+                Nome:<input type="text" th:field="*{nome}" /><br/>
+                <span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome Error</span><br/>
+                <input type="submit" value="gravar" />
+            </form>
+        </div>
     </body>
 </html>

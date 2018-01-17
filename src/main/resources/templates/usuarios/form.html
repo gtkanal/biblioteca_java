@@ -6,13 +6,21 @@
         <title>Insert title here</title>
     </head>
     <body>
-        <form id="usuarioForm" th:action="@{/usuarios/(form)}" method="post" th:object="${usuario}" action="#" >
-            <input type="hidden"  th:field="*{id}" />
-            Usuário:<input type="text" th:field="*{username}" /><br/>
-            <span  th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span><br/>
-            Senha: <input type="password" th:field="*{passsword}" /><br/>
-            <span  th:if="${#fields.hasErrors('passsword')}" th:errors="*{passsword}">Password Error</span><br/>
-            <input type="submit" value="gravar" />
-        </form>
+        <nav layout:fragment="header" aria-label="breadcrumb" role="navigation">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" th:href="@{/usuarios/list}">Usuários</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Novo Usuário</li>
+            </ol>
+        </nav>
+        <div layout:fragment="content" class="container">
+            <form id="usuarioForm" th:action="@{/usuarios/(form)}" method="post" th:object="${usuario}" action="#" >
+                <input type="hidden"  th:field="*{id}" />
+                Usuário:<input type="text" th:field="*{username}" /><br/>
+                <span  th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span><br/>
+                Senha: <input type="password" th:field="*{passsword}" /><br/>
+                <span  th:if="${#fields.hasErrors('passsword')}" th:errors="*{passsword}">Password Error</span><br/>
+                <input type="submit" value="gravar" />
+            </form>
+        </div>
     </body>
 </html>
