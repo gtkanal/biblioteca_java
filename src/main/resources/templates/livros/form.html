@@ -14,7 +14,7 @@
         </nav>
         <div layout:fragment="content" class="container">
 
-            <form id="livroForm" th:action="@{/livros/(form)}" method="post" th:object="${livro}" action="#" >
+            <form id="livroForm" th:action="@{/livros/(form)}" method="post" th:object="${livro}" action="#" enctype="multipart/form-data">
                 <div>
                     <img th:if="${livro.capa}" th:src="@{'/' + ${livro.capa}}" width="100px" />
                 </div>

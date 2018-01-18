@@ -11,7 +11,7 @@ public class FileSaver {
 
     public static String write(String baseFolder, MultipartFile file) {
 
-        String realPath = "/home/gtkanal/Documentos/documentos_fib_java/images/" + baseFolder;
+        String realPath = "/home/gtkanal/Documentos/documentos_fib_java/livros/" + baseFolder;
 
         // se for windows, verificar corretamenteo path da pasta, por exemplo
         //  String realPath = "D:\\Arquivos\\" + baseFolder;
