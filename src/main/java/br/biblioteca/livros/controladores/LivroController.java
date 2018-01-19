@@ -49,28 +49,39 @@ public class LivroController {
 
 
     @PostMapping(params = "form")
-    public ModelAndView create(@RequestParam("capaUrl") MultipartFile capaUrl, @ModelAttribute("livro") @Valid Livro livro, BindingResult bindingResult, Model model) {
+    public ModelAndView create(@RequestParam("capaUrl") MultipartFile capaUrl,
+                               @ModelAttribute("livro") @Valid Livro livro,
+                               BindingResult bindingResult, Model model) {
 
-        if(capaUrl.getOriginalFilename().equals("")) {
-            model.addAttribute("message", "A capa não pode ser vazia");
-            return new ModelAndView("livro/form");
-        }else {
-            if(capaUrl.getContentType().equals("image/jpeg")){
-                String webPath = FileSaver.write("uploaded-images",capaUrl);
-                livro.setCapa(webPath);
-            }else{
-                model.addAttribute("message", "Arquivo em formato errado. Permitido apenas jpg");
-                return new ModelAndView("livro/form");
+        if (livro.getId() != null) {
+            if (capaUrl.getOriginalFilename().length() > 0) {
+                incluiCapa(capaUrl, livro, model);
+            }
+        } else {
+            if (capaUrl.getOriginalFilename().equals("")) {
+                model.addAttribute("capa", "A capa não pode ser vazia");
+            } else {
+                incluiCapa(capaUrl, livro, model);
             }
         }
 
-        if (bindingResult.hasErrors()) {
-            return new ModelAndView("livros/form");
+
+        if (bindingResult.hasErrors()  || model.containsAttribute("message")) {
+            Iterable<Autor> autores = autorRepository.findAll();
+            return new ModelAndView("livro/form", "autores", autores);
         }
 
-
-        livro = livroRepository.save(livro);
+        livro = this.livroRepository.save(livro);
         return new ModelAndView("redirect:/livros/list");
+    }
+
+    private void incluiCapa(MultipartFile capaUrl, Livro livro, Model model) {
+        if (capaUrl.getContentType().equals("image/jpeg")) {
+            String webPath = FileSaver.write("uploaded-images", capaUrl);
+            livro.setCapa(webPath);
+        } else {
+            model.addAttribute("capa", "Arquivo em formato errado. Permitido apenas jpg");
+        }
     }
 
     @GetMapping("/alterar/{id}")

@@ -1,49 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Insert title here</title>
-    </head>
-    <body>
-        <nav layout:fragment="header" aria-label="breadcrumb" role="navigation">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#" th:href="@{/livros/list}">Livros</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Novo Livro</li>
-            </ol>
-        </nav>
-        <div layout:fragment="content" class="container">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+</head>
+<body>
 
-            <form id="livroForm" th:action="@{/livros/(form)}" method="post" th:object="${livro}" action="#" enctype="multipart/form-data">
-                <div>
-                    <img th:if="${livro.capa}" th:src="@{'/' + ${livro.capa}}" width="100px" />
-                </div>
-                <div>
-                    <label>Capa do livro</label>
-                    <input type="file" name="capaUrl" />
-                    <span th:if="${message}" style="color: red;" th:text="${message}">Message Error</span>
-                </div>
+<nav layout:fragment="header" aria-label="breadcrumb" role="navigation">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"
+                                       th:href="@{/livros/list}">Livros</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Novo
+            Livro</li>
+    </ol>
+</nav>
 
-                <div class="form-group row">
+<div layout:fragment="content" class="container">
 
-                    <input type="hidden"  th:field="*{id}" />
+    <div>
+        <img th:if="${livro.capa}" th:src="@{'/' + ${livro.capa}}"
+             width="100px" />
+    </div>
 
-                    <label for="staticTitulo" class="col-sm-2 col-form-label">Título</label>
-                    <div class="col-sm-10">
-                        <input type="text" th:field="*{nome}"  class="form-control-plaintext" id="staticTitulo" >
-                        <span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome Error</span>
-                    </div>
+    <form id="livroForm" th:action="@{/livros/(form)}" method="post"
+          th:object="${livro}" action="#" enctype="multipart/form-data">
 
-                    <label for="staticPaginas" class="col-sm-2 col-form-label">Total Páginas</label>
-                    <div class="col-sm-10">
-                        <input type="text" th:field="*{quantidade}" class="form-control-plaintext" id="staticPaginas" >
-                        <span  th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}">Quantidade de pagina Error</span>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">gravar</button>
-
-                </div>
-            </form>
+        <div>
+            <label for="pathCapa">Capa do livro</label> <input type="file"
+                                                               name="capaUrl" /> <span th:if="${message}" style="color: red;"
+                                                                                       th:text="${message}">Message Error</span>
+            <input type="hidden" th:if="${livro.capa}" name="capa" th:value="${livro.capa}" />
         </div>
-    </body>
+
+        <div class="form-group row">
+
+            <input type="hidden" th:field="*{id}" /> <label for="staticTitulo"
+                                                            class="col-sm-2 col-form-label">Título</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{nome}"
+                       class="form-control-plaintext" id="staticTitulo"> <span
+                    th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome
+						Error</span>
+            </div>
+
+            <label for="staticPaginas" class="col-sm-2 col-form-label">Total
+                Páginas</label>
+            <div class="col-sm-10">
+                <input type="number" th:field="*{quantidade}"
+                       class="form-control-plaintext" id="staticPaginas"> <span
+                    th:if="${#fields.hasErrors('quantidade')}"
+                    th:errors="*{quantidade}">Quantidade de pagina Error</span>
+            </div>
+
+            <label for="staticAutor" class="col-sm-2 col-form-label">Autor</label>
+            <div class="col-sm-10">
+                <select th:field="*{autor}">
+                    <option th:each="autor : ${autores}" th:value="${autor.id}"
+                            th:text="${autor.nome}">Nome do autor</option>
+                </select>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">gravar</button>
+
+        </div>
+    </form>
+</div>
+
+</body>
 </html>

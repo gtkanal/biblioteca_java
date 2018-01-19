@@ -32,11 +32,12 @@ public class Livro {
 	private String isbn;
 
     private String capa;
-	
+
 	@ManyToOne
 	@Cascade(CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "AUTOR_ID")
 	private Autor autor;
-	
+
 	@OneToMany(mappedBy="livro")
 	private List<Review> reviews = new ArrayList<>();
 	
