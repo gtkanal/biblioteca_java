@@ -31,10 +31,10 @@
 					<td>
 						<a href="#" th:href="@{'/clientes/'+${cliente.idCliente}}" th:text="${cliente.nome}"> Título </a>
 					</td>
-					<td>
+					<td th:if="${#request.isUserInRole('ADMIN')}">
 						<a href="#" th:href="@{'/clientes/alterar/'+${cliente.idCliente}}" > Altera </a>
 					</td>
-					<td>
+					<<td th:if="${#request.isUserInRole('ADMIN')}">
 						<a href="#" th:href="@{'/clientes/excluir/'+${cliente.idCliente}}" > Excluir </a>
 					</td>
 				</tr>

@@ -22,7 +22,11 @@
             <li><a class="brand" th:href="@{/livros/list}" href="#"> Livros </a></li>
             <li><a class="brand" th:href="@{/autores/list}" href="#"> Autores </a></li>
             <li><a class="brand" th:href="@{/usuarios/list}" href="#"> Usuários </a></li>
+            <li><a class="brand" th:href="@{/logout}" href="#"> Logout </a></li>
         </ul>
+        <div class="navbar-header text-right" style="float: right;">
+            <span class="navbar-brand" style="color: blue;">Olá [[${#httpServletRequest.remoteUser}]]!</span>
+        </div>
     </nav>
     <h1 layout:fragment="header">cabeçalho falso</h1>
     <div layout:fragment="content">content falso</div>

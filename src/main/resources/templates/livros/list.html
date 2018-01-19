@@ -31,8 +31,13 @@
             </td>
             <td scope="row" th:text="${livro.id}">1</td>
             <td><a href="#" th:href="@{'/livros/'+${livro.id}}" th:text="${livro.nome}"> Título </a></td>
-            <td><a href="#" th:href="@{'/livros/alterar/'+${livro.id}}"> Altera </a></td>
-            <td><a href="#" th:href="@{'/livros/excluir/'+${livro.id}}"> Excluir </a></td>
+            <td th:if="${#request.isUserInRole('ADMIN')}">
+                <a href="#" th:href="@{'/livros/alterar/'+${livro.id}}"> Altera </a>
+            </td>
+
+            <td th:if="${#request.isUserInRole('ADMIN')}" >
+                <a href="#" th:href="@{'/livros/excluir/'+${livro.id}}"> Excluir </a>
+            </td>
         </tr>
 
         </tbody>

@@ -31,10 +31,10 @@
 					<td>
 						<a href="#" th:href="@{'/autores/'+${autor.id}}" th:text="${autor.nome}"> Nome </a>
 					</td>
-					<td>
+					<td th:if="${#request.isUserInRole('ADMIN')}">
 						<a href="#" th:href="@{'/autores/alterar/'+${autor.id}}" > Altera </a>
 					</td>
-					<td>
+					<td th:if="${#request.isUserInRole('ADMIN')}">
 						<a href="#" th:href="@{'/autores/excluir/'+${autor.id}}" > Excluir </a>
 					</td>
 				</tr>
