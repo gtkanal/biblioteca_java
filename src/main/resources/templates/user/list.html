@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="layout">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h1 layout:fragment="header">
+			Usuários
+		</h1>
+        <div layout:fragment="content" class="container">
+            <h1>   Lista Basica</h1>
+            <h2>   Acesso Liberado <span sec:authentication="name"></span></h2>
+            <div>
+                <ul>
+                    <li><a th:href="@{/user/list}" href="#"> Lista Basica </a></li>
+                    <li sec:authorize="hasAuthority('ROLE_ADMIN')" ><a th:href="@{/user/listadmin}" href="#"> Lista Admin </a></li>
+                    <li><a th:href="@{/user/logout}" href="#"> Logout </a></li>
+                </ul>
+            </div>
+        </div>
+	</body>
+</html>

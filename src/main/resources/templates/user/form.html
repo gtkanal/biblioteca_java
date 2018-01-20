@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Insert title here</title>
+    </head>
+    <body>
+
+        <nav layout:fragment="header" aria-label="breadcrumb" role="navigation">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"
+                                               th:href="@{/user/list}">Livros</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Novo
+                    Usuário</li>
+            </ol>
+        </nav>
+        <div layout:fragment="content" class="container">
+            <form id="userForm" th:action="@{/user/autentication}" th:object="${userForm}" action="#" method="post">
+                <input type="text" th:field="*{username}"/>
+                <label for="staticUsername" class="col-sm-2 col-form-label">Usuário</label>
+                <span  th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Nome Error</span><br/>
+
+                <input type="password" th:field="*{passsword}"/>
+                <label for="staticPassword" class="col-sm-2 col-form-label">Senha</label>
+                <span  th:if="${#fields.hasErrors('passsword')}" th:errors="*{passsword}">Nome Error</span><br/>
+
+                <input type="submit" name="login" value="login" />
+            </form>
+        </div>
+
+    </body>
+</html>

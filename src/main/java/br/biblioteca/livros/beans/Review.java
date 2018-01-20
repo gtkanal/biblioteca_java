@@ -20,7 +20,7 @@ public class Review {
 	private Livro livro;
 	
 	@ManyToOne
-	private Usuario usuario;
+	private User usuario;
 	
 	public Livro getLivro() {
 		return livro;
@@ -54,11 +54,11 @@ public class Review {
 		this.comentario = comentario;
 	}
 
-	public Usuario getUsuario() {
+	public User getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(User usuario) {
 		this.usuario = usuario;
 	}
 	
