@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+</head>
+<body>
+
+<h1 layout:fragment="header">
+    <a th:href="@{/emprestimo/novo}"  class="btn btn-sm btn-info"><i class="glyphicon glyphicon-plus"></i></a>
+    Emprestar
+</h1>
+<div layout:fragment="content" class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Título</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="livro : ${livros}">
+            <td scope="row">
+                <img th:if="${livro.capa}" th:src="@{'/' + ${livro.capa}}" width="100px" />
+                <img th:unless="${livro.capa}" th:src="@{'../img/unless.jpg'}" width="100px" />
+            </td>
+            <td><a href="#" th:href="@{'/livros/'+${livro.id}}" th:text="${livro.nome}"> Título </a></td>
+
+            <td>
+                <a href="#" th:href="@{'/emprestimo/devolver/'+${livro.id}}"> Devolver </a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -32,6 +32,9 @@ public class User {
     @OneToMany(mappedBy="usuario")
     private List<Role> roles = new ArrayList<>();
 
+	@OneToMany(mappedBy="user")
+	private List<Emprestimo> emprestimos = new ArrayList<>();
+
     private String passwordConfirm;
 
 
@@ -93,5 +96,13 @@ public class User {
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
+    }
+
+    public List<Emprestimo> getEmprestimos() {
+        return emprestimos;
+    }
+
+    public void setEmprestimos(List<Emprestimo> emprestimos) {
+        this.emprestimos = emprestimos;
     }
 }

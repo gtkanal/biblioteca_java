@@ -1,28 +1,32 @@
 package br.biblioteca.livros.beans;
 
+import com.sun.istack.internal.Nullable;
+
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 public class Emprestimo {
 	
 	@Id
-	private Long id;
+    @GeneratedValue
+    private Long id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@Nullable
 	private Date dataEmprestimo;
-	
-	@Temporal(TemporalType.TIMESTAMP)
+
+    @Temporal(TemporalType.TIMESTAMP)
+	@Nullable
 	private Date dataDevolucao;
 	
 	@ManyToOne
 	private Livro livro;
-	
+
+    @ManyToOne
+    private User user;
+
 	public Livro getLivro() {
 		return livro;
 	}
@@ -54,7 +58,14 @@ public class Emprestimo {
 	public void setDataDevolucao(Date dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
 	}
-	
+
+	public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 	
 
 }
