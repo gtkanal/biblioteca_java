@@ -2,6 +2,11 @@ package br.biblioteca.livros.repository;
 
 
 import br.biblioteca.livros.beans.Autor;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AutorRepository extends JpaRepository <Autor, Long> { }
+public interface AutorRepository extends JpaRepository <Autor, Long> {
+
+    Autor findByNome(String nome);
+
+}
